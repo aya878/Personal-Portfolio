@@ -1,5 +1,5 @@
-const sections = document.querySelectorAll("section[id]");
-const navLinks = document.querySelectorAll(
+let sections = document.querySelectorAll("section[id]");
+let navLinks = document.querySelectorAll(
   '.nav-links a[href^="#"]'
 );
 
@@ -7,7 +7,7 @@ window.addEventListener("scroll", () => {
   let currentSection = "";
 
   sections.forEach((section) => {
-    const sectionTop = section.offsetTop - 150;
+    let sectionTop = section.offsetTop - 150;
 
     if (window.scrollY >= sectionTop) {
       currentSection = section.id;
@@ -24,11 +24,11 @@ window.addEventListener("scroll", () => {
 
 
 // Dark / Light Mode
-const themeButton = document.getElementById("theme-toggle-button");
-const htmlElement = document.documentElement;
+let themeButton = document.getElementById("theme-toggle-button");
+let htmlElement = document.documentElement;
 
 // Load saved theme
-const savedTheme = localStorage.getItem("theme");
+let savedTheme = localStorage.getItem("theme");
 
 if (savedTheme === "dark") {
   htmlElement.classList.add("dark");
@@ -41,7 +41,7 @@ if (themeButton) {
   themeButton.addEventListener("click", () => {
     htmlElement.classList.toggle("dark");
 
-    const currentTheme = htmlElement.classList.contains("dark")
+    let currentTheme = htmlElement.classList.contains("dark")
       ? "dark"
       : "light";
 
@@ -51,8 +51,8 @@ if (themeButton) {
 
 
 // Portfolio Tabs / Filter
-const filterButtons = document.querySelectorAll(".portfolio-filter");
-const portfolioItems = document.querySelectorAll(".portfolio-item");
+let filterButtons = document.querySelectorAll(".portfolio-filter");
+let portfolioItems = document.querySelectorAll(".portfolio-item");
 
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -64,10 +64,10 @@ filterButtons.forEach((button) => {
     // Add active to clicked button
     button.classList.add("active");
 
-    const filterValue = button.dataset.filter;
+    let filterValue = button.dataset.filter;
 
     portfolioItems.forEach((item) => {
-      const itemCategory = item.dataset.category;
+      let itemCategory = item.dataset.category;
 
       if (filterValue === "all" || filterValue === itemCategory) {
         item.style.display = "";
@@ -81,9 +81,9 @@ filterButtons.forEach((button) => {
 
 
 // Settings Sidebar
-const settingsSidebar = document.getElementById("settings-sidebar");
-const settingsToggle = document.getElementById("settings-toggle");
-const closeSettings = document.getElementById("close-settings");
+let settingsSidebar = document.getElementById("settings-sidebar");
+let settingsToggle = document.getElementById("settings-toggle");
+let closeSettings = document.getElementById("close-settings");
 
 function openSettings() {
   settingsSidebar.classList.remove("translate-x-full");
@@ -110,9 +110,9 @@ if (closeSettings && settingsSidebar) {
 }
 
 
-const colorsGrid = document.getElementById("theme-colors-grid");
+let colorsGrid = document.getElementById("theme-colors-grid");
 
-const colors = [
+let colors = [
   "#6366f1",
   "#8b5cf6",
   "#ec4899",
@@ -133,7 +133,7 @@ function changeColor(color) {
 
 if (colorsGrid) {
   colors.forEach((color) => {
-    const button = document.createElement("button");
+    let button = document.createElement("button");
 
     button.type = "button";
     button.style.cssText = `
@@ -154,7 +154,7 @@ if (colorsGrid) {
     colorsGrid.appendChild(button);
   });
 
-  const savedColor = localStorage.getItem("accentColor");
+  let savedColor = localStorage.getItem("accentColor");
 
   if (savedColor) {
     changeColor(savedColor);
@@ -163,7 +163,7 @@ if (colorsGrid) {
 
 
 // Font Settings
-const fontOptions = document.querySelectorAll(".font-option");
+let fontOptions = document.querySelectorAll(".font-option");
 
 function applyFont(font) {
   document.body.classList.remove(
@@ -177,7 +177,7 @@ function applyFont(font) {
   localStorage.setItem("selectedFont", font);
 
   fontOptions.forEach((option) => {
-    const selected = option.dataset.font === font;
+    let selected = option.dataset.font === font;
 
     option.classList.toggle("active", selected);
     option.setAttribute("aria-checked", selected);
@@ -186,7 +186,7 @@ function applyFont(font) {
 
 fontOptions.forEach((option) => {
   option.addEventListener("click", () => {
-    const font = option.dataset.font;
+    let font = option.dataset.font;
 
     if (["alexandria", "tajawal", "cairo"].includes(font)) {
       applyFont(font);
@@ -194,5 +194,5 @@ fontOptions.forEach((option) => {
   });
 });
 
-const savedFont = localStorage.getItem("selectedFont") || "tajawal";
+let savedFont = localStorage.getItem("selectedFont") || "tajawal";
 applyFont(savedFont);
